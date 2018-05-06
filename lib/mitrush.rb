@@ -44,4 +44,21 @@ module Mitrush
     update_nested_hash_array(input) { |_, value, new_kvp_hash| new_kvp_hash[:new_value] = value.to_s rescue value }
   end
 
+  def self.rowify_string(first_string, add_string_hashes, crop_overlength=true)
+    new_string = first_string.dup
+    current_length = 0
+    add_string_hashes.each do |add_string_hash|
+      if crop_overlength && current_length + new_string.length > add_string_hash[:start_position] - 3
+        new_string = new_string[0..add_string_hash[:start_position] - 4]
+      end
+      spacer = add_string_hash[:spacer] || ' '
+      add_string_hash[:start_position].times do
+        new_string = "#{new_string}#{spacer}"
+        break if new_string.length >= add_string_hash[:start_position]
+      end
+      new_string = "#{new_string}#{add_string_hash[:string]}"
+    end
+    new_string
+  end
+
 end
