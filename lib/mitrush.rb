@@ -87,7 +87,7 @@ module Mitrush
       end
       column_hash[:width].times do
         column_string = "#{column_string}#{column_hash[:spacer] || ' '}"
-        break if column_string.length >= column_hash[:width] + 1
+        break if column_string.length >= column_hash[:width]
       end
       column_string
     end
