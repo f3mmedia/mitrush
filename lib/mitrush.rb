@@ -20,7 +20,7 @@ module Mitrush
   end
 
   def self.delete_keys(hash, keys)
-    hash.delete_if { |key, _| keys.include?(key.to_s) || keys.include?(key.to_sym) }
+    hash.delete_if { |key, _| keys.include?(key) }
   end
 
   def self.deep_delete_keys(input, keys)
