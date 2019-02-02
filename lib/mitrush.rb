@@ -23,6 +23,10 @@ module Mitrush
     hash.delete_if { |key, _| keys.include?(key) }
   end
 
+  def self.deep_copy(input)
+    Marshal.load(Marshal.dump(input))
+  end
+
   def self.deep_delete_keys(input, keys)
     if input.is_a?(Array)
       input.each { |item| deep_delete_keys(item, keys) }
